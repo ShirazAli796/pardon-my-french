@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Organization {
+  id    Int           @id @default(autoincrement())
+  title String
+  form  HiringForms[]
+}
+
+model Form {
+  id         Int           @id @default(autoincrement())
+  name       String
+  hiringForm HiringForms[]
+  field      Field[]
+}
+
+model HiringForms {
+  id             Int          @id @default(autoincrement())
+  name           String
+  expireDate     DateTime
+  urlLink        String
+  organizationId Int
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  formId Int
+  form   Form @relation(fields: [formId], references: [id])
+}
+
+model Field {
+  id      Int      @id @default(autoincrement())
+  title   String
+  type    String
+  options String[]
+  url     String?
+
+  formId Int
+  form   Form @relation(fields: [formId], references: [id])
+}
