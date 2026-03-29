@@ -46,7 +46,7 @@ export default function Wrapper({
     >
       {/* DROP INDICATOR — TOP */}
       {showLineTop && (
-        <span className="absolute -top-px left-0 right-0 h-0.5 bg-black rounded-full z-10" />
+        <span className="absolute -top-px left-0 right-0 h-0.5 bg-zinc-200 rounded-full z-10" />
       )}
 
       <div className="flex-1">{children}</div>
@@ -87,7 +87,7 @@ export default function Wrapper({
 
       {/* DROP INDICATOR — BOTTOM */}
       {showLineBottom && (
-        <span className="absolute -bottom-px left-0 right-0 h-0.5 bg-black rounded-full z-10" />
+        <span className="absolute -bottom-px left-0 right-0 h-0.5 bg-zinc-200 rounded-full z-10" />
       )}
 
       <div

@@ -24,7 +24,7 @@ export default function FileUploader({ label, onFileSelect, accept }: Props) {
   };
 
   return (
-    <div className="w-full flex flex-col gap-1.5 mt-6">
+    <div className="w-full flex flex-col gap-1.5 ">
       <label className="text-sm font-medium text-zinc-600 ml-1 mb-1">
         {label}
       </label>

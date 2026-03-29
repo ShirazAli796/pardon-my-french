@@ -10,14 +10,14 @@ export default function BulletPointDisplay({ topic, points }: Props) {
   const activePoints = points.filter(p => p.trim() !== "");
 
   return (
-    <div className="w-full max-w-2xl py-8">
+    <div className="w-full max-w-2xl py-3">
       {/* Topic Title */}
       <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mb-6">
         {topic || "Untitled List"}
       </h2>
 
       {/* Bullet List */}
-      <ul className="space-y-4">
+      <ul className="space-y-2">
         {activePoints.map((point, index) => (
           <li key={index} className="flex items-start gap-4 group">
             {/* Custom Modern Bullet */}

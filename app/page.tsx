@@ -25,7 +25,7 @@ import Modal from "./components/Modal";
 import ZincAccordionItem, { AccordionItem } from "./components/AccordinDisplay";
 import AccordionMaker from "./components/AccordinMaker";
 import AccordionDisplay from "./components/AccordinDisplay";
-import Sidebar from "./(main)/FormBuilder/components/Sidebar";
+import Sidebar from "./(main)/builder/components/Sidebar";
 import ZincSidebar from "./components/SideBar";
 
 export default function page() {
@@ -136,28 +136,29 @@ export default function page() {
       />
 
       {/* <Tooltip text={"some data is lost"} children={"ok"}/> */}
-{/* 
+      {/* 
       <Modal isOpen={true} onClose={function (): void {
         throw new Error("Function not implemented.");
       } } title={""} ><P>Some</P></Modal> */}
 
-    <AccordionMaker/>
+      <AccordionMaker />
 
-    <AccordionDisplay sections={[{
-     title: "title",
-      content:  "lorem sadsadsa;mdlsa;ld",
-    }, {
-     title: "title",
-      content:  "lorem sadsadsa;mdlsa;ld",
-    },{
-     title: "title",
-      content:  "lorem sadsadsa;mdlsa;ld",
-    }]}/>
-
-
-   
-
-
+      <AccordionDisplay
+        sections={[
+          {
+            title: "title",
+            content: "lorem sadsadsa;mdlsa;ld",
+          },
+          {
+            title: "title",
+            content: "lorem sadsadsa;mdlsa;ld",
+          },
+          {
+            title: "title",
+            content: "lorem sadsadsa;mdlsa;ld",
+          },
+        ]}
+      />
     </div>
   );
 }
