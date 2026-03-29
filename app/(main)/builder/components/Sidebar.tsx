@@ -74,7 +74,7 @@ export default function Sidebar() {
           <input
             type="text"
             placeholder="Search"
-            // onChange={handleSearch}  
+            // onChange={handleSearch}
             className="w-full mt-4 py-3 px-4 rounded-lg border border-zinc-800 bg-transparent
             text-white placeholder:text-white/40 outline-none focus:border-zinc-400/80"
           />

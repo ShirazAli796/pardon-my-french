@@ -14,6 +14,7 @@ import BulletPointDisplay from "@/app/components/BulletPointDisplay";
 import LinkInput from "@/app/components/Link";
 import LinkRedirect from "@/app/components/LinkRedirect";
 import { Type } from "lucide-react";
+import RadioGroup from "@/app/components/Radiobuttons";
 
 export const SIDEBAR_ITEMS = [
   {
@@ -23,7 +24,6 @@ export const SIDEBAR_ITEMS = [
         id: "P",
         title: "p tag",
         icon: "▾",
-        type: "text",
         component: (
           <P
             variant="MUTED"
@@ -84,6 +84,30 @@ export const SIDEBAR_ITEMS = [
             type="text"
             label="Text Field"
             placeholder="Enter text"
+          />
+        ),
+      },
+      {
+        id: "Radio",
+        title: "Radio Button",
+        icon: "Aa",
+        component: (
+          <RadioGroup
+            label={"Degree"}
+            options={[
+              {
+                label: "Be Software Eng",
+                value: "Be Software Eng",
+              },
+              {
+                label: "Be Electrical Eng",
+                value: "Be Electrical Eng",
+              },
+            ]}
+            selectedValue={""}
+            onChange={function (value: string): void {
+              throw new Error("Function not implemented.");
+            }}
           />
         ),
       },

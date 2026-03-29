@@ -22,8 +22,8 @@ function EmptyDropZone() {
   return (
     <div
       ref={ref}
-      className={`min-h-32 rounded-xl border-2 my-10 border-dashed hover:border-zinc-400 transition-all flex items-center justify-center
-        ${isOver ? "border-blue-400 bg-blue-600/10" : "border-zinc-300"}`}
+      className={`min-h-32 rounded-xl border-2  border-dashed hover:border-zinc-400 transition-all flex items-center justify-center
+        ${isOver ? "border-blue-400 bg-red-500" : "border-zinc-300"}`}
     >
       <p className="text-zinc-500 text-sm">
         Drag fields here to build your form
@@ -38,7 +38,9 @@ export default function Form({ items, setItems, overId, activeId }: FormProps) {
 
   return (
     <>
-      {items.length === 0 && <EmptyDropZone />}
+
+    <div className="my-6">
+        {items.length === 0 && <EmptyDropZone />}
 
       {items.map((item) => (
         <Wrapper
@@ -57,6 +59,8 @@ export default function Form({ items, setItems, overId, activeId }: FormProps) {
       ))}
 
       {/* <AddActionButton onClick={() => console.log("add")} /> */}
+    </div>
+    
     </>
   );
 }
