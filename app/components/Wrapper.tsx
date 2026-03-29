@@ -1,19 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Edit2, Trash2, GripVertical } from "lucide-react";
 import { useSortable } from "@dnd-kit/react/sortable";
+import dynamic from "next/dynamic";
+import { SkeletonLoader } from "./SkeletonLoader";
 
 interface Props {
   id: string;
   children: React.ReactNode;
+  text: string;
   onEdit?: () => void;
   onDelete?: () => void;
   showLineTop?: boolean;
   showLineBottom?: boolean;
 }
 
+const componentsMap = {
+  text: dynamic(() => import("./InputFormField"), {
+    loading: () => <SkeletonLoader />,
+  }),
+};
+
 export default function Wrapper({
   id,
   children,
+  text,
   onEdit,
   onDelete,
   showLineTop,
@@ -21,6 +31,7 @@ export default function Wrapper({
 }: Props) {
   const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const Component = componentsMap[text];
 
   const { ref, handleRef, isDragging } = useSortable({
     id,
@@ -28,9 +39,23 @@ export default function Wrapper({
 
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    setMenuPos({ x: e.clientX, y: e.clientY });
-  };
 
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+
+    requestAnimationFrame(() => {
+      const menuHeight = menuRef.current?.offsetHeight || 140;
+      const viewportHeight = window.innerHeight;
+
+      let newY = clickY;
+
+      if (clickY + menuHeight > viewportHeight) {
+        newY = clickY - menuHeight;
+      }
+
+      setMenuPos({ x: clickX, y: newY });
+    });
+  };
   useEffect(() => {
     const handleClick = () => setMenuPos(null);
     window.addEventListener("click", handleClick);
@@ -50,7 +75,6 @@ export default function Wrapper({
       )}
 
       <div className="flex-1">{children}</div>
-
       {menuPos && (
         <div
           ref={menuRef}

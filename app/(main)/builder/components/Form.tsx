@@ -22,8 +22,8 @@ function EmptyDropZone() {
   return (
     <div
       ref={ref}
-      className={`min-h-32 rounded-xl border-2 my-10 border-dashed transition-all flex items-center justify-center
-        ${isOver ? "border-blue-400 bg-blue-400/10" : "border-zinc-700"}`}
+      className={`min-h-32 rounded-xl border-2 my-10 border-dashed hover:border-zinc-400 transition-all flex items-center justify-center
+        ${isOver ? "border-blue-400 bg-blue-600/10" : "border-zinc-300"}`}
     >
       <p className="text-zinc-500 text-sm">
         Drag fields here to build your form
@@ -44,6 +44,7 @@ export default function Form({ items, setItems, overId, activeId }: FormProps) {
         <Wrapper
           key={item.id}
           id={item.id}
+          text={item.type}
           showLineTop={item.id === overId && overIndex < activeIndex}
           showLineBottom={item.id === overId && overIndex > activeIndex}
           onEdit={() => console.log("edit", item.id)}
