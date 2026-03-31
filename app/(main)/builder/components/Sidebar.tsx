@@ -4,6 +4,7 @@ import { SIDEBAR_ITEMS } from "./sidebarItem";
 import { ChevronLeft, ChevronRight, Icon } from "lucide-react";
 import Button from "@/app/components/Button";
 import { useBuilderContext } from "@/contexts/builderContext";
+import { CircularLoader } from "@/app/components/Loader";
 
 function DraggableSidebarItem({
   id,
@@ -61,6 +62,7 @@ export default function Sidebar() {
                   <ChevronLeft className="w-5 h-5" />
                 </button>
               </div>
+              <CircularLoader size="lg" />
 
               <div className="flex flex-col gap-2">
                 <Button
