@@ -13,7 +13,6 @@ import MessageCard from "@/app/components/MessageCard";
 import BulletPointDisplay from "@/app/components/BulletPointDisplay";
 import LinkInput from "@/app/components/Link";
 import LinkRedirect from "@/app/components/LinkRedirect";
-import { Type } from "lucide-react";
 import RadioGroup from "@/app/components/Radiobuttons";
 
 export const SIDEBAR_ITEMS = [
@@ -24,51 +23,47 @@ export const SIDEBAR_ITEMS = [
         id: "P",
         title: "p tag",
         icon: "▾",
-        component: (
-          <P
-            variant="MUTED"
-            children={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
-            }
-          />
-        ),
+        type: "paragraph",
+        data: {
+          children:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+          variant: "DEFAULT",
+          className: "",
+        },
       },
 
       {
         id: "H",
         title: "Header",
         icon: "▾",
-        component: (
-          <H level={1} children={"Lorem Ipsum is simply dummy text"} />
-        ),
+        type: "heading",
+        data: {
+          level: 1,
+          children: "Lorem Ipsum is simply dummy text ",
+          className: "",
+        },
       },
       {
         id: "bullet point",
         title: "Bullet point",
         icon: "▾",
-        component: (
-          <BulletPointDisplay
-            topic={"Requirements"}
-            points={[
-              "There are many variations of passages of Lorem Ipsum available",
-              "but the majority have suffered alteration in some form, by injected",
-              "humour, or randomised words which don't look even slightly",
-            ]}
-          />
-        ),
+        type: "bullet",
+        data: {
+          topic: "Place Holder",
+          points: ["Point 1", "Point 2", "Point 3"],
+        },
       },
       {
         id: "button",
         title: "Button",
         icon: "⏎",
-        component: (
-          <Button
-            variant="PRIMARY"
-            placeholder=""
-            value="Submit"
-            onClick={() => {}}
-          />
-        ),
+        type: "button",
+        data: {
+          variant: "PRIMARY",
+          placeholder: "place holder",
+          value: "place holder",
+          onClick: () => {},
+        },
       },
     ],
   },
@@ -77,101 +72,126 @@ export const SIDEBAR_ITEMS = [
     elements: [
       {
         id: "text-input",
-        title: "Text",
+        title: "input",
         icon: "Aa",
-        component: (
-          <InputFormField
-            type="text"
-            label="Text Field"
-            placeholder="Enter text"
-          />
-        ),
+        type: "textinput",
+        data: {
+          label: "Place holder",
+          placeholder: "place holder",
+          type: "text",
+          value: "",
+          onChange: (e) => {
+            
+          },
+        },
       },
       {
         id: "Radio",
         title: "Radio Button",
         icon: "Aa",
-        component: (
-          <RadioGroup
-            label={"Degree"}
-            options={[
-              {
-                label: "Be Software Eng",
-                value: "Be Software Eng",
-              },
-              {
-                label: "Be Electrical Eng",
-                value: "Be Electrical Eng",
-              },
-            ]}
-            selectedValue={""}
-            onChange={function (value: string): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-        ),
+        type: "radio",
+        data: {
+          label: "Place Holder",
+          options: [
+            {
+              label: "option 1",
+              value: "option 1",
+              description: "description",
+            },
+
+            {
+              label: "option 2",
+              value: "option 2",
+              description: "description",
+            },
+
+            {
+              label: "option 3",
+              value: "option 3",
+              description: "description",
+            },
+          ],
+          selectedValue: "",
+          onChange: (value: string) => {},
+        },
       },
 
-      {
-        id: "email-input",
-        title: "Email",
-        icon: "@",
-        component: (
-          <InputFormField
-            type="email"
-            label="Email"
-            placeholder="Enter email"
-          />
-        ),
-      },
       {
         id: "textarea",
         title: "Textarea",
         icon: "¶",
-        component: <Textarea label="Description" />,
+        type: "textarea",
+        data: {
+          label: "place holder",
+          placeholder: "place holder",
+          rows: "5",
+          value: "some value",
+          onChange: () => {},
+        },
       },
       {
         id: "file-upload",
         title: "File",
         icon: "↑",
-        component: <FileUploader label="" onFileSelect={() => {}} />,
+        type: "file",
+        data: {
+          label: "",
+          onFileSelect: (file: File | null) => {},
+          accept: "png",
+        },
       },
       {
         id: "dropdown",
         title: "Select",
         icon: "▾",
-        component: (
-          <Dropdown
-            label=""
-            options={[
-              { label: "Option 1", value: "1" },
-              { label: "Option 2", value: "2" },
-            ]}
-            onSelect={() => {}}
-          />
-        ),
+        type: "select",
+        data: {
+          label: "",
+          options: [
+            {
+              label: "value 1",
+              value: "value 1",
+            },
+
+            {
+              label: "value 2",
+              value: "value 2",
+            },
+
+            {
+              label: "value 3",
+              value: "value 3",
+            },
+          ],
+          onSelect: (value: string) => {},
+          placeholder: "place",
+        },
       },
 
       {
         id: "date",
         title: "Date",
         icon: "▾",
-        component: <DatePicker label={"Date Picker"} />,
+        type: "date",
+        data: {
+          label: "Place holder",
+          value: "",
+          onChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+          min: "",
+          max: "",
+        },
       },
       {
         id: "checkboc",
         title: "Checkbox",
         icon: "▾",
-        component: (
-          <Checkbox
-            label={"Terms and condition"}
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
-            checked={false}
-            onChange={function (checked: boolean): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-        ),
+        type: "checkbox",
+        data: {
+          label: "place holder",
+          checked: false,
+          onChange: (checked: boolean) => {},
+          description: "description",
+        },
       },
     ],
   },
@@ -182,22 +202,22 @@ export const SIDEBAR_ITEMS = [
         id: "Card",
         title: "Card",
         icon: "▾",
-        component: (
-          <MessageCard
-            variant={"CAUTION"}
-            title={"Contrary to popular belief."}
-            message={
-              "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-            }
-          />
-        ),
+        type: "message",
+        data: {
+          variant: "CAUTION",
+          title: "message card",
+          message: "message",
+        },
       },
 
       {
         id: "seperate",
         title: "Seperator",
         icon: "▾",
-        component: <Separator text="a friend." />,
+        type: "separator",
+        data: {
+          text: "if value is empty there will be no text here.",
+        },
       },
     ],
   },
@@ -210,27 +230,24 @@ export const SIDEBAR_ITEMS = [
         id: "Link",
         title: "Link",
         icon: "▾",
-        component: (
-          <LinkInput
-            label={"Enter Your Linkedin Or github"}
-            onLinkChange={function (url: string): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-        ),
+        type: "link",
+        data: {
+          label: "place holder",
+          placeholder: "plac holder",
+          onLinkChange: (url: string) => {},
+        },
       },
       {
         id: "Redirect",
         title: "Redirect",
         icon: "▾",
-        component: (
-          <LinkRedirect
-            label={"Our page"}
-            title={"out web"}
-            description={"some"}
-            href={"www.google.com"}
-          />
-        ),
+        type: "redirect",
+        data: {
+          label: "place holder",
+          title: "place holder",
+          description: "place holder",
+          href: "place holder",
+        },
       },
     ],
   },

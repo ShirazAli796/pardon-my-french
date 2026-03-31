@@ -7,23 +7,65 @@ import { SkeletonLoader } from "./SkeletonLoader";
 interface Props {
   id: string;
   children: React.ReactNode;
-  text: string;
+  type: string;
+  props: any;
   onEdit?: () => void;
   onDelete?: () => void;
   showLineTop?: boolean;
   showLineBottom?: boolean;
 }
 
-const componentsMap = {
-  text: dynamic(() => import("./InputFormField"), {
+const componentsMap: Record<string, any> = {
+  textinput: dynamic(() => import("./InputFormField"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  textarea: dynamic(() => import("./Textarea"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  file: dynamic(() => import("./Filefield"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  button: dynamic(() => import("./Button"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  select: dynamic(() => import("./Select"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  date: dynamic(() => import("./Date"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  checkbox: dynamic(() => import("./Checkbox"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  separator: dynamic(() => import("./Seperator"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  heading: dynamic(() => import("./H"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  paragraph: dynamic(() => import("./P"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  message: dynamic(() => import("./MessageCard"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  bullet: dynamic(() => import("./BulletPointDisplay"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  link: dynamic(() => import("./Link"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  redirect: dynamic(() => import("./LinkRedirect"), {
+    loading: () => <SkeletonLoader />,
+  }),
+  radio: dynamic(() => import("./Radiobuttons"), {
     loading: () => <SkeletonLoader />,
   }),
 };
-
 export default function Wrapper({
   id,
-  children,
-  text,
+  type,
+  props,
   onEdit,
   onDelete,
   showLineTop,
@@ -31,7 +73,8 @@ export default function Wrapper({
 }: Props) {
   const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  const Component = componentsMap[text];
+
+  const Component = componentsMap[type];
 
   const { ref, handleRef, isDragging } = useSortable({
     id,
@@ -56,6 +99,7 @@ export default function Wrapper({
       setMenuPos({ x: clickX, y: newY });
     });
   };
+
   useEffect(() => {
     const handleClick = () => setMenuPos(null);
     window.addEventListener("click", handleClick);
@@ -74,7 +118,9 @@ export default function Wrapper({
         <span className="absolute -top-px left-0 right-0 h-0.5 bg-zinc-200 rounded-full z-10" />
       )}
 
-      <div className="flex-1">{children}</div>
+      <div className="flex-1">
+        {Component ? <Component {...props} /> : null}
+      </div>
       {menuPos && (
         <div
           ref={menuRef}

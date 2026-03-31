@@ -7,10 +7,8 @@ interface Props {
 }
 
 export default function H({ level, children, className = '' }: Props) {
-  // We use a mapping to ensure semantic HTML tags (h1, h2, etc.)
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
 
-  // Modern UI usually has tighter tracking (letter-spacing) for larger text
+  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
   const baseStyles = "text-zinc-900 font-bold tracking-tight transition-colors duration-200";
 
   const levelStyles = {

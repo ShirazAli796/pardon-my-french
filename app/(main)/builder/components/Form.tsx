@@ -38,29 +38,26 @@ export default function Form({ items, setItems, overId, activeId }: FormProps) {
 
   return (
     <>
-
-    <div className="my-6">
+      <div className="my-6">
         {items.length === 0 && <EmptyDropZone />}
 
-      {items.map((item) => (
-        <Wrapper
-          key={item.id}
-          id={item.id}
-          text={item.type}
-          showLineTop={item.id === overId && overIndex < activeIndex}
-          showLineBottom={item.id === overId && overIndex > activeIndex}
-          onEdit={() => console.log("edit", item.id)}
-          onDelete={() =>
-            setItems((prev) => prev.filter((i) => i.id !== item.id))
-          }
-        >
-          {item.component}
-        </Wrapper>
-      ))}
+        {items.map((item) => (
+          <Wrapper
+            key={item.id}
+            id={item.id}
+            type={item.type}
+            props={item.data}
+            showLineTop={item.id === overId && overIndex < activeIndex}
+            showLineBottom={item.id === overId && overIndex > activeIndex}
+            onEdit={() => console.log("edit", item.id)}
+            onDelete={() =>
+              setItems((prev) => prev.filter((i) => i.id !== item.id))
+            }
+          />
+        ))}
 
-      {/* <AddActionButton onClick={() => console.log("add")} /> */}
-    </div>
-    
+        {/* <AddActionButton onClick={() => console.log("add")} /> */}
+      </div>
     </>
   );
 }

@@ -11,6 +11,7 @@ export default function P({
   variant = "DEFAULT",
   className = "",
 }: Props) {
+
   const variantStyles = {
     
     DEFAULT: "text-base text-zinc-700 leading-relaxed",

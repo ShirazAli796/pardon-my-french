@@ -27,7 +27,7 @@ export default function InputFormField({
         id="input-field"
         type={type}
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange?.(e.target.value)}
         placeholder={placeholder}
         className="w-full py-3 px-4 rounded-lg border border-zinc-200 bg-white text-zinc-900 
                    placeholder:text-zinc-400 outline-none transition-all duration-200 
