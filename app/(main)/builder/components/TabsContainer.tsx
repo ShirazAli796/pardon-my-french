@@ -1,9 +1,5 @@
 "use client";
-
-import React, { JSX } from "react";
 import { MdOutlineTextFields } from "react-icons/md";
-import { LucideIcon } from "lucide-react";
-import { IconType } from "react-icons";
 
 interface TabsProps {
   title: string;

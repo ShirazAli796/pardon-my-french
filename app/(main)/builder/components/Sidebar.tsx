@@ -1,18 +1,18 @@
 "use client";
 import { useDraggable } from "@dnd-kit/react";
 import { SIDEBAR_ITEMS } from "./sidebarItem";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Icon } from "lucide-react";
 import Button from "@/app/components/Button";
 import { useBuilderContext } from "@/contexts/builderContext";
 
 function DraggableSidebarItem({
   id,
   title,
-  icon,
+  Icon,
 }: {
   id: string;
   title: string;
-  icon: string;
+  Icon: any;
 }) {
   const { ref, isDragging } = useDraggable({
     id,
@@ -27,14 +27,16 @@ function DraggableSidebarItem({
         text-white text-[12px] transition-all select-none
         ${isDragging ? "opacity-50" : ""}`}
     >
-      <span className="text-lg">{icon}</span>
+      {/* <span className="text-lg">
+        <Icon />
+      </span> */}
       <span className="text-center">{title}</span>
     </div>
   );
 }
 
 export default function Sidebar() {
-  const { isOpen, toggle, editMode } = useBuilderContext();
+  const { isOpen, toggle, editMode, setEditMode } = useBuilderContext();
 
   return (
     <>
@@ -46,17 +48,41 @@ export default function Sidebar() {
           overflow-y-auto`}
       >
         {editMode.isActive == true ? (
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl sm:text-3xl font-bold text-white">
-              Edit Mode
-            </h1>
-            <button
-              onClick={() => toggle()}
-              className="p-2 rounded-full hover:bg-zinc-100 text-zinc-400 hover:text-zinc-900 transition-all cursor-pointer "
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-          </div>
+          <>
+            <div className="h-screen flex flex-col justify-between">
+              <div className="flex justify-between items-center">
+                <h1 className="text-2xl sm:text-3xl font-bold text-white">
+                  Edit Mode
+                </h1>
+                <button
+                  onClick={() => toggle()}
+                  className="p-2 rounded-full hover:bg-zinc-100 text-zinc-400 hover:text-zinc-900 transition-all cursor-pointer "
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Button
+                  variant="SECONDARY"
+                  placeholder="Save"
+                  value="Save"
+                  onClick={() => {}}
+                />
+                <Button
+                  variant="PRIMARY"
+                  placeholder="Save"
+                  value="Discard"
+                  onClick={() => {
+                    setEditMode({
+                      isActive: false,
+                      type: "",
+                    });
+                  }}
+                />
+              </div>
+            </div>
+          </>
         ) : (
           <>
             <div>
@@ -89,7 +115,7 @@ export default function Sidebar() {
                           key={item.id}
                           id={item.id}
                           title={item.title}
-                          icon={item.icon}
+                          Icon={item.Icon}
                         />
                       ))}
                     </div>

@@ -1,19 +1,7 @@
 "use client";
-import InputFormField from "@/app/components/InputFormField";
-import Textarea from "@/app/components/Textarea";
-import FileUploader from "@/app/components/Filefield";
-import Button from "@/app/components/Button";
-import Dropdown from "@/app/components/Select";
-import DatePicker from "@/app/components/Date";
-import Checkbox from "@/app/components/Checkbox";
-import Separator from "@/app/components/Seperator";
-import H from "@/app/components/H";
-import P from "@/app/components/P";
-import MessageCard from "@/app/components/MessageCard";
-import BulletPointDisplay from "@/app/components/BulletPointDisplay";
-import LinkInput from "@/app/components/Link";
-import LinkRedirect from "@/app/components/LinkRedirect";
-import RadioGroup from "@/app/components/Radiobuttons";
+import { PiParagraph } from "react-icons/pi";
+import { Heading } from "lucide-react";
+import { CaseSensitive } from "lucide-react";
 
 export const SIDEBAR_ITEMS = [
   {
@@ -21,8 +9,8 @@ export const SIDEBAR_ITEMS = [
     elements: [
       {
         id: "P",
-        title: "p tag",
-        icon: "▾",
+        title: "Paragraph",
+        Icon: CaseSensitive,
         type: "paragraph",
         data: {
           children:
@@ -35,7 +23,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "H",
         title: "Header",
-        icon: "▾",
+        Icon: Heading,
         type: "heading",
         data: {
           level: 1,
@@ -46,7 +34,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "bullet point",
         title: "Bullet point",
-        icon: "▾",
+        Icon: PiParagraph,
         type: "bullet",
         data: {
           topic: "Place Holder",
@@ -56,7 +44,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "button",
         title: "Button",
-        icon: "⏎",
+        Icon: PiParagraph,
         type: "button",
         data: {
           variant: "PRIMARY",
@@ -73,22 +61,20 @@ export const SIDEBAR_ITEMS = [
       {
         id: "text-input",
         title: "input",
-        icon: "Aa",
+        Icon: PiParagraph,
         type: "textinput",
         data: {
           label: "Place holder",
           placeholder: "place holder",
           type: "text",
           value: "",
-          onChange: (e) => {
-            
-          },
+          onChange: () => {},
         },
       },
       {
         id: "Radio",
-        title: "Radio Button",
-        icon: "Aa",
+        title: "Radio",
+        Icon: PiParagraph,
         type: "radio",
         data: {
           label: "Place Holder",
@@ -119,7 +105,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "textarea",
         title: "Textarea",
-        icon: "¶",
+        Icon: PiParagraph,
         type: "textarea",
         data: {
           label: "place holder",
@@ -132,7 +118,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "file-upload",
         title: "File",
-        icon: "↑",
+        Icon: PiParagraph,
         type: "file",
         data: {
           label: "",
@@ -143,7 +129,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "dropdown",
         title: "Select",
-        icon: "▾",
+        Icon: PiParagraph,
         type: "select",
         data: {
           label: "",
@@ -171,7 +157,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "date",
         title: "Date",
-        icon: "▾",
+        Icon: PiParagraph,
         type: "date",
         data: {
           label: "Place holder",
@@ -184,7 +170,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "checkboc",
         title: "Checkbox",
-        icon: "▾",
+        Icon: PiParagraph,
         type: "checkbox",
         data: {
           label: "place holder",
@@ -201,7 +187,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "Card",
         title: "Card",
-        icon: "▾",
+        Icon: PiParagraph,
         type: "message",
         data: {
           variant: "CAUTION",
@@ -213,7 +199,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "seperate",
         title: "Seperator",
-        icon: "▾",
+        Icon: PiParagraph,
         type: "separator",
         data: {
           text: "if value is empty there will be no text here.",
@@ -229,7 +215,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "Link",
         title: "Link",
-        icon: "▾",
+        Icon: PiParagraph,
         type: "link",
         data: {
           label: "place holder",
@@ -240,7 +226,7 @@ export const SIDEBAR_ITEMS = [
       {
         id: "Redirect",
         title: "Redirect",
-        icon: "▾",
+        Icon: PiParagraph,
         type: "redirect",
         data: {
           label: "place holder",

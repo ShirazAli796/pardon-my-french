@@ -18,16 +18,12 @@ export default function FormBuilder() {
 
   function handleDragEnd(event) {
     const sourceId = String(event.operation.source?.id ?? "");
-    setEditMode({
-      isActive: true,
-      type: "",
-    });
     const targetId = String(event.operation.target?.id ?? "");
 
     if (!targetId || targetId === "null" || targetId === sourceId) {
       setActiveId(null);
       setOverId(null);
-      return;
+      return; // ← was returning here but editMode was already set above
     }
 
     const isFromSidebar = ALL_ELEMENTS.some((i) => i.id === sourceId);
@@ -52,6 +48,8 @@ export default function FormBuilder() {
         );
         return next;
       });
+
+      setEditMode({ isActive: true, type: template.type }); // ✅ only fires on valid sidebar drop
     } else {
       setFormItems((current) => move(current, event));
     }
@@ -84,13 +82,6 @@ export default function FormBuilder() {
         <div
           className={`flex-1 flex flex-col items-center transition-all duration-300 ease-in-out ${isOpen ? "ml-80" : "ml-0"}`}
         >
-          <button
-            onClick={() => {
-              console.log(formItems);
-            }}
-          >
-            debuig
-          </button>
           <main className="w-full max-w-5xl">
             <Form
               items={formItems}
