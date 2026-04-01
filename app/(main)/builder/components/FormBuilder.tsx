@@ -63,7 +63,7 @@ export default function FormBuilder() {
       onDragEnd={handleDragEnd}
     >
       <div className="w-full h-screen flex">
-        <div className="w-89 shrink-0">
+        <div className="w-89 shrink">
           <Sidebar />
         </div>
 

@@ -33,8 +33,14 @@ function DraggableSidebarItem({
   );
 }
 
+
+
+
+
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
+
+
   // const [filtered, setFiltered] = useState(SIDEBAR_ITEMS);
 
   // const handleSearch = (e) => {
@@ -56,7 +62,7 @@ export default function Sidebar() {
       )}
 
       <div
-        className={`fixed top-0 left-0 z-40 w-100 h-screen flex flex-col justify-between
+        className={`fixed top-0 left-0 z-40 w-100 h-screen flex flex-col justify-between  
           bg-zinc-900 px-5 py-5 transform transition-all duration-300 ease-in-out
           ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}`}
       >
@@ -83,7 +89,7 @@ export default function Sidebar() {
             {SIDEBAR_ITEMS.map((group) => (
               <div key={group.Type} className="p-3 ">
                 <p className="text-zinc-400 text-sm mb-3">{group.Type}</p>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                   {group.elements?.map((item) => (
                     <DraggableSidebarItem
                       key={item.id}
