@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 import { useDroppable } from "@dnd-kit/react";
 import Wrapper from "@/app/components/Wrapper";
 import AddActionButton from "./AddActionButton";
+import { useBuilderContext } from "@/contexts/builderContext";
 
 interface FormItem {
   id: string;
@@ -35,32 +36,48 @@ function EmptyDropZone() {
 export default function Form({ items, setItems, overId, activeId }: FormProps) {
   const overIndex = items.findIndex((i) => i.id === overId);
   const activeIndex = items.findIndex((i) => i.id === activeId);
+  const {editMode, setEditMode, setIsOpen} = useBuilderContext();
 
   return (
     <>
-
-    <div className="my-6">
+      <div className="my-6">
         {items.length === 0 && <EmptyDropZone />}
 
-      {items.map((item) => (
-        <Wrapper
-          key={item.id}
-          id={item.id}
-          text={item.type}
-          showLineTop={item.id === overId && overIndex < activeIndex}
-          showLineBottom={item.id === overId && overIndex > activeIndex}
-          onEdit={() => console.log("edit", item.id)}
-          onDelete={() =>
-            setItems((prev) => prev.filter((i) => i.id !== item.id))
-          }
-        >
-          {item.component}
-        </Wrapper>
-      ))}
+        {items.map((item) => (
+          <Wrapper
+            key={item.id}
+            id={item.id}
+            type={item.type}
+            props={item.data}
+            showLineTop={item.id === overId && overIndex < activeIndex}
+            showLineBottom={item.id === overId && overIndex > activeIndex}
+            onEdit={() => {
 
-      {/* <AddActionButton onClick={() => console.log("add")} /> */}
-    </div>
-    
+              setIsOpen(true);
+              setEditMode({
+                   isActive: true,
+                  itemId: item.id,
+                  type: item.type,
+              })
+            
+
+            }}
+            onDelete={() =>{
+                  setEditMode({
+                   isActive: false,
+                  itemId: "",
+                  type: "",
+              })
+              setItems((prev) => prev.filter((i) => i.id !== item.id))
+
+            }
+              
+            }
+          />
+        ))}
+
+        {/* <AddActionButton onClick={() => console.log("add")} /> */}
+      </div>
     </>
   );
 }
