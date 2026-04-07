@@ -27,6 +27,9 @@ import AccordionMaker from "./components/AccordinMaker";
 import AccordionDisplay from "./components/AccordinDisplay";
 import Sidebar from "./(main)/builder/components/Sidebar";
 import ZincSidebar from "./components/SideBar";
+import Slide from "./components/Slider";
+import Slider from "./components/Slider";
+import CustomVibrantSlider from "./components/Slider";
 
 export default function page() {
   const foodOptions = [
@@ -99,6 +102,7 @@ export default function page() {
         selectedValue={"basic"}
         onChange={() => {}}
       />
+
 
       <FileUploader
         label="Profile Picture"

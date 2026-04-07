@@ -7,6 +7,7 @@ import { useBuilderContext } from "@/contexts/builderContext";
 import { CircularLoader } from "@/app/components/Loader";
 import Dropdown from "@/app/components/Select";
 import InputFormField from "@/app/components/InputFormField";
+import { X, Plus } from "lucide-react";
 
 function DraggableSidebarItem({
   id,
@@ -135,6 +136,108 @@ export default function Sidebar({ items, setItems }) {
         );
       }
 
+      case "bullet": {
+        return (
+          <div>
+            <InputFormField
+              label={"Bullet point label"}
+              mode="dark"
+              value={item.data.topic}
+              type={"text"}
+              onChange={(value) => {
+                setItems((prevItems) =>
+                  prevItems.map((cur) =>
+                    cur.id === editMode.itemId
+                      ? { ...cur, data: { ...cur.data, topic: value } }
+                      : cur,
+                  ),
+                );
+              }}
+            />
+
+            <div className="flex justify-between items-center">
+              <p className="text-zinc-400 text-sm my-3 ">Bullet Points</p>
+              <Plus
+                className="text-zinc-700 hover:text-zinc-300 cursor-pointer"
+                width={18}
+                height={18}
+                onClick={() => {
+                  setItems((prev) =>
+                    prev.map((cur) =>
+                      cur.id === editMode.itemId
+                        ? {
+                            ...cur,
+                            data: {
+                              ...cur.data,
+                              points: [
+                                ...cur.data.points,
+                                `point ${cur.data.points.length + 1}`,
+                              ],
+                            },
+                          }
+                        : cur,
+                    ),
+                  );
+                }}
+              />
+            </div>
+
+            {item.data.points.map((v, index) => (
+              <div className="flex items-center gap-2" key={index}>
+                <InputFormField
+                  label={" "}
+                  mode="dark"
+                  value={v}
+                  type={"text"}
+                  margin=""
+                  onChange={(value) => {
+                    setItems((prevItems) =>
+                      prevItems.map((cur) =>
+                        cur.id === editMode.itemId
+                          ? {
+                              ...cur,
+                              data: {
+                                ...cur.data,
+                                points: cur.data.points.map((p, i) =>
+                                  i === index ? value : p,
+                                ),
+                              },
+                            }
+                          : cur,
+                      ),
+                    );
+                  }}
+                />
+                <X
+                  className="w-5 h-5 text-zinc-500 hover:text-red-500 cursor-pointer flex-shrink-0"
+                  onClick={() => {
+                    setItems((prevItems) =>
+                      prevItems.map((cur) =>
+                        cur.id === editMode.itemId
+                          ? {
+                              ...cur,
+                              data: {
+                                ...cur.data,
+                                points: cur.data.points.filter(
+                                  (_, i) => i !== index,
+                                ),
+                              },
+                            }
+                          : cur,
+                      ),
+                    );
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      case "button": {
+        return <div></div>;
+      }
+
       default:
         return (
           <div>
@@ -149,7 +252,7 @@ export default function Sidebar({ items, setItems }) {
       <div
         className={`fixed top-0 left-0 z-40 h-screen flex flex-col justify-between
           bg-zinc-900 px-4 py-5 transform transition-all duration-300 ease-in-out
-          w-3/4 sm:w-64 xl:w-80
+          w-3/4 sm:w-84 xl:w-100
           ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}
           overflow-y-auto`}
       >

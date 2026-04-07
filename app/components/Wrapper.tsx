@@ -7,7 +7,6 @@ import { useBuilderContext } from "@/contexts/builderContext";
 
 interface Props {
   id: string;
-  children: React.ReactNode;
   type: string;
   props: any;
   onEdit?: () => void;

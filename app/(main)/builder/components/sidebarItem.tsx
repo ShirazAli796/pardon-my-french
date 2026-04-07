@@ -50,6 +50,7 @@ export const SIDEBAR_ITEMS = [
           variant: "PRIMARY",
           placeholder: "place holder",
           value: "place holder",
+          action: "",
           onClick: () => {},
         },
       },

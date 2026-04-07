@@ -12,7 +12,7 @@ import {
 // Define the shape of edit mode state
 type EditModeType = {
   isActive: boolean;
-  itemId: string,
+  itemId?: string,
   type: string;
 };
 
