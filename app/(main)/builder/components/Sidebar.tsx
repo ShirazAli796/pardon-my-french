@@ -378,6 +378,151 @@ export default function Sidebar({ items, setItems }) {
         );
       }
 
+      case "radio": {
+        return (
+          <div className="flex flex-col items-center gap-2">
+            <InputFormField
+              label={"Input Field Label"}
+              mode="dark"
+              value={item.data.label ?? "place holder"}
+              type={"text"}
+              onChange={(value) => {
+                setItems((prev) =>
+                  prev.map((cur) =>
+                    cur.id === editMode.itemId
+                      ? {
+                          ...cur,
+                          data: {
+                            ...cur.data,
+                            label: value,
+                          },
+                        }
+                      : cur,
+                  ),
+                );
+              }}
+            />
+
+            {/* Header */}
+            <div className="w-full flex justify-between items-center">
+              <p className="text-zinc-400 text-sm my-3">Radio Options</p>
+              <Plus
+                className="text-zinc-700 hover:text-zinc-300 cursor-pointer"
+                width={18}
+                height={18}
+                onClick={() => {
+                  setItems((prev) =>
+                    prev.map((cur) =>
+                      cur.id === editMode.itemId
+                        ? {
+                            ...cur,
+                            data: {
+                              ...cur.data,
+                              options: [
+                                ...cur.data.options,
+                                {
+                                  label: `option ${cur.data.options.length + 1}`,
+                                  value: `option ${cur.data.options.length + 1}`,
+                                  description: "",
+                                },
+                              ],
+                            },
+                          }
+                        : cur,
+                    ),
+                  );
+                }}
+              />
+            </div>
+
+            {/* Options */}
+         {item.data.options.map((opt, index) => (
+  <div className="flex flex-col gap-2 w-full" key={index}>
+    <div className="flex items-center gap-2">
+      {/* Label Input */}
+      <InputFormField
+        label={"Label"}
+        mode="dark"
+        value={opt.label}
+        type={"text"}
+        margin=""
+        onChange={(value) => {
+          setItems((prevItems) =>
+            prevItems.map((cur) =>
+              cur.id === editMode.itemId
+                ? {
+                    ...cur,
+                    data: {
+                      ...cur.data,
+                      options: cur.data.options.map((o, i) =>
+                        i === index
+                          ? { ...o, label: value, value }
+                          : o
+                      ),
+                    },
+                  }
+                : cur
+            )
+          );
+        }}
+      />
+
+      {/* Delete */}
+      <X
+        className="w-5 h-5 text-zinc-500 hover:text-red-500 cursor-pointer flex-shrink-0"
+        onClick={() => {
+          setItems((prevItems) =>
+            prevItems.map((cur) =>
+              cur.id === editMode.itemId
+                ? {
+                    ...cur,
+                    data: {
+                      ...cur.data,
+                      options: cur.data.options.filter(
+                        (_, i) => i !== index
+                      ),
+                    },
+                  }
+                : cur
+            )
+          );
+        }}
+      />
+    </div>
+
+    {/* Description Input */}
+    <InputFormField
+      label={"Description"}
+      mode="dark"
+      value={opt.description}
+      type={"text"}
+      margin=""
+      onChange={(value) => {
+        setItems((prevItems) =>
+          prevItems.map((cur) =>
+            cur.id === editMode.itemId
+              ? {
+                  ...cur,
+                  data: {
+                    ...cur.data,
+                    options: cur.data.options.map((o, i) =>
+                      i === index
+                        ? { ...o, description: value }
+                        : o
+                    ),
+                  },
+                }
+              : cur
+          )
+        );
+      }}
+    />
+  </div>
+))}
+          </div>
+        );
+      }
+
       default:
         return (
           <div>
