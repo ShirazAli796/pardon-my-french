@@ -73,7 +73,7 @@ export default function page() {
 
       <Button
         variant={"PRIMARY"}
-        placeholder={"Click me"}
+        fullWidth={'default'}
         value={"Something"}
         onClick={() => {}}
       />

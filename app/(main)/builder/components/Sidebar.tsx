@@ -235,7 +235,85 @@ export default function Sidebar({ items, setItems }) {
       }
 
       case "button": {
-        return <div></div>;
+        return (
+          <div className="flex flex-col items-center gap-2">
+            <InputFormField
+              label={"Button Title"}
+              mode="dark"
+              type={"text"}
+              value={item.data.placeholder}
+              margin=""
+              onChange={(v) => {
+                setItems((prev) =>
+                  prev.map((cur) =>
+                    cur.id === editMode.itemId
+                      ? {
+                          ...cur,
+                          data: {
+                            ...cur.data,
+                            value: v,
+                            placeholder: v,
+                          },
+                        }
+                      : cur,
+                  ),
+                );
+              }}
+            />
+
+            <Dropdown
+              label={"Button Variants"}
+              mode={"dark"}
+              placeholder={item.data?.variant ?? "DEFAULT"}
+              options={[
+                { label: "Primary", value: "PRIMARY" },
+                { label: "Secondary", value: "SECONDARY" },
+              ]}
+              onSelect={function (value: string): void {
+                setItems((prev) =>
+                  prev.map((cur) =>
+                    cur.id == editMode.itemId
+                      ? {
+                          ...cur,
+                          data: {
+                            ...cur.data,
+                            variant: value,
+                          },
+                        }
+                      : cur,
+                  ),
+                );
+              }}
+            />
+            <Dropdown
+              label={"Button Actions"}
+              mode={"dark"}
+              placeholder={item.data?.variant ?? "DEFAULT"}
+              options={[
+                { label: "Submit", value: "submit" },
+                { label: "Clear", value: "clear" },
+              ]}
+              onSelect={function (value: string): void {
+                console.log(value);
+              }}
+            />
+
+
+             <Dropdown
+              label={"Button Size"}
+              mode={"dark"}
+              placeholder={item.data?.variant ?? "DEFAULT"}
+              options={[
+                { label: "Full", value: "full" },
+                { label: "Half", value: "half" },
+                { label: "Default", value: "default" },
+              ]}
+              onSelect={function (value: string): void {
+                
+              }}
+            />
+          </div>
+        );
       }
 
       default:
