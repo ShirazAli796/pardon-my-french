@@ -43,7 +43,7 @@ export default function Sidebar({ items, setItems }) {
   const { isOpen, toggle, editMode, setEditMode } = useBuilderContext();
 
   const handleRendering = () => {
-    // getting that needs be updated.
+    // getting item that needs be updated.
     let item = items.find((cur) => cur.id == editMode.itemId);
     if (!item) {
       return <p className="text-white">Item not found</p>;
@@ -354,7 +354,7 @@ export default function Sidebar({ items, setItems }) {
               <InputFormField
                 label={"Input Field Label"}
                 mode="dark"
-                value={item.data.children}
+                value={item.data.label ?? "place holder"}
                 type={"text"}
                 onChange={(value) => {
                   setItems((prev) =>
