@@ -20,11 +20,21 @@ export default function Dropdown({
   options,
   onSelect,
   placeholder,
+    defaultValue,
   mode = "light", // Default to light
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<Option | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+  if (defaultValue) {
+    const found = options.find((opt) => opt.value === defaultValue);
+    if (found) {
+      setSelected(found);
+    }
+  }
+}, [defaultValue, options]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

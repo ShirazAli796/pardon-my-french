@@ -47,9 +47,10 @@ export const SIDEBAR_ITEMS = [
         Icon: PiParagraph,
         type: "button",
         data: {
-          variant: "PRIMARY",
+          variant: "",
           placeholder: "place holder",
           value: "place holder",
+          fullWidth: "default",
           action: "",
           onClick: () => {},
         },

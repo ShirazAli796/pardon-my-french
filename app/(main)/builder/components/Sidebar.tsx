@@ -264,7 +264,7 @@ export default function Sidebar({ items, setItems }) {
             <Dropdown
               label={"Button Variants"}
               mode={"dark"}
-              placeholder={item.data?.variant ?? "DEFAULT"}
+              defaultValue={item.data?.variant ?? "SECONDARY"}
               options={[
                 { label: "Primary", value: "PRIMARY" },
                 { label: "Secondary", value: "SECONDARY" },
@@ -288,7 +288,7 @@ export default function Sidebar({ items, setItems }) {
             <Dropdown
               label={"Button Actions"}
               mode={"dark"}
-              placeholder={item.data?.variant ?? "DEFAULT"}
+              placeholder={item.data?.action ?? "submit"}
               options={[
                 { label: "Submit", value: "submit" },
                 { label: "Clear", value: "clear" },
@@ -298,20 +298,82 @@ export default function Sidebar({ items, setItems }) {
               }}
             />
 
-
-             <Dropdown
+            <Dropdown
               label={"Button Size"}
               mode={"dark"}
-              placeholder={item.data?.variant ?? "DEFAULT"}
+              defaultValue={item.data?.fullWidth ?? "default"}
               options={[
                 { label: "Full", value: "full" },
                 { label: "Half", value: "half" },
                 { label: "Default", value: "default" },
               ]}
               onSelect={function (value: string): void {
-                
+                setItems((prev) =>
+                  prev.map((cur) =>
+                    cur.id === editMode.itemId
+                      ? {
+                          ...cur,
+                          data: {
+                            ...cur.data,
+                            fullWidth: value,
+                          },
+                        }
+                      : cur,
+                  ),
+                );
               }}
             />
+          </div>
+        );
+      }
+
+      case "textinput": {
+        return (
+          <div>
+            <div className="flex flex-col items-center gap-2">
+              <Dropdown
+                label={"Input type"}
+                mode={"dark"}
+                defaultValue={item.data.type ?? "text"}
+                options={[
+                  { label: "Email", value: "email" },
+                  { label: "Text", value: "text" },
+                  { label: "Password", value: "password" },
+                  { label: "Number", value: "number" },
+                ]}
+                onSelect={function (value: string): void {
+                  setItems((prevItems) =>
+                    prevItems.map((cur) =>
+                      cur.id === editMode.itemId
+                        ? { ...cur, data: { ...cur.data, type: value } }
+                        : cur,
+                    ),
+                  );
+                }}
+              />
+              <InputFormField
+                label={"Input Field Label"}
+                mode="dark"
+                value={item.data.children}
+                type={"text"}
+                onChange={(value) => {
+                  setItems((prev) =>
+                    prev.map((cur) =>
+                      cur.id === editMode.itemId
+                        ? {
+                            ...cur,
+                            data: {
+                              ...cur.data,
+                              label: value,
+                              placeholder: value,
+                            },
+                          }
+                        : cur,
+                    ),
+                  );
+                }}
+              />
+            </div>
           </div>
         );
       }
