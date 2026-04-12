@@ -73,7 +73,6 @@ export default function Wrapper({
 }: Props) {
   const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  
 
   const Component = componentsMap[type];
 
@@ -150,7 +149,7 @@ export default function Wrapper({
             }}
             className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-white hover:text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"
           >
-            <Trash2 className="w-3.5 h-3.5 text-zinc-400" />
+            <Trash2 className="w-3.5 h-3.5 text-zinc-400 hover:text-red-400" />
             Remove Field
           </button>
         </div>

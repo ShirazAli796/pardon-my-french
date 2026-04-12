@@ -436,89 +436,89 @@ export default function Sidebar({ items, setItems }) {
             </div>
 
             {/* Options */}
-         {item.data.options.map((opt, index) => (
-  <div className="flex flex-col gap-2 w-full" key={index}>
-    <div className="flex items-center gap-2">
-      {/* Label Input */}
-      <InputFormField
-        label={"Label"}
-        mode="dark"
-        value={opt.label}
-        type={"text"}
-        margin=""
-        onChange={(value) => {
-          setItems((prevItems) =>
-            prevItems.map((cur) =>
-              cur.id === editMode.itemId
-                ? {
-                    ...cur,
-                    data: {
-                      ...cur.data,
-                      options: cur.data.options.map((o, i) =>
-                        i === index
-                          ? { ...o, label: value, value }
-                          : o
-                      ),
-                    },
-                  }
-                : cur
-            )
-          );
-        }}
-      />
+            {item.data.options.map((opt, index) => (
+              <div className="flex flex-col gap-2 w-full" key={index}>
+                <div className="flex items-center gap-2">
+                  {/* Label Input */}
+                  <InputFormField
+                    label={"Label"}
+                    mode="dark"
+                    value={opt.label}
+                    type={"text"}
+                    margin=""
+                    onChange={(value) => {
+                      setItems((prevItems) =>
+                        prevItems.map((cur) =>
+                          cur.id === editMode.itemId
+                            ? {
+                                ...cur,
+                                data: {
+                                  ...cur.data,
+                                  options: cur.data.options.map((o, i) =>
+                                    i === index
+                                      ? { ...o, label: value, value }
+                                      : o,
+                                  ),
+                                },
+                              }
+                            : cur,
+                        ),
+                      );
+                    }}
+                  />
 
-      {/* Delete */}
-      <X
-        className="w-5 h-5 text-zinc-500 hover:text-red-500 cursor-pointer flex-shrink-0"
-        onClick={() => {
-          setItems((prevItems) =>
-            prevItems.map((cur) =>
-              cur.id === editMode.itemId
-                ? {
-                    ...cur,
-                    data: {
-                      ...cur.data,
-                      options: cur.data.options.filter(
-                        (_, i) => i !== index
-                      ),
-                    },
-                  }
-                : cur
-            )
-          );
-        }}
-      />
-    </div>
+                  {/* Delete */}
+                  <X
+                    className="w-5 h-5 text-zinc-500 hover:text-red-500 cursor-pointer flex-shrink-0"
+                    onClick={() => {
+                      setItems((prevItems) =>
+                        prevItems.map((cur) =>
+                          cur.id === editMode.itemId
+                            ? {
+                                ...cur,
+                                data: {
+                                  ...cur.data,
+                                  options: cur.data.options.filter(
+                                    (_, i) => i !== index,
+                                  ),
+                                },
+                              }
+                            : cur,
+                        ),
+                      );
+                    }}
+                  />
+                </div>
 
-    {/* Description Input */}
-    <InputFormField
-      label={"Description"}
-      mode="dark"
-      value={opt.description}
-      type={"text"}
-      margin=""
-      onChange={(value) => {
-        setItems((prevItems) =>
-          prevItems.map((cur) =>
-            cur.id === editMode.itemId
-              ? {
-                  ...cur,
-                  data: {
-                    ...cur.data,
-                    options: cur.data.options.map((o, i) =>
-                      i === index
-                        ? { ...o, description: value }
-                        : o
-                    ),
-                  },
-                }
-              : cur
-          )
-        );
-      }}
-    />
-  </div>
-))}
+                {/* Description Input */}
+                <InputFormField
+                  label={"Description"}
+                  mode="dark"
+                  value={opt.description}
+                  type={"text"}
+                  margin=""
+                  onChange={(value) => {
+                    setItems((prevItems) =>
+                      prevItems.map((cur) =>
+                        cur.id === editMode.itemId
+                          ? {
+                              ...cur,
+                              data: {
+                                ...cur.data,
+                                options: cur.data.options.map((o, i) =>
+                                  i === index
+                                    ? { ...o, description: value }
+                                    : o,
+                                ),
+                              },
+                            }
+                          : cur,
+                      ),
+                    );
+                  }}
+                />
+              </div>
+            ))}
           </div>
         );
       }
@@ -632,7 +632,7 @@ export default function Sidebar({ items, setItems }) {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-3 sm:gap-4 mt-4">
+            <div className="flex flex-col gap-1 sm:gap-4 mt-4">
               <Button
                 variant="SECONDARY"
                 placeholder="Create Form"
